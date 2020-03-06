@@ -1,0 +1,6 @@
+def main():
+    print("solve {{ Problem }}")
+
+
+if __name__ == "__main__":
+    main()

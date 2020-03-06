@@ -5,10 +5,10 @@ description = ""
 authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.scripts]
-"contest" = "atc_cli.main:contest"
+"atcli" = "atc_cli.main:contest"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.7"
 fire = "^0.2.1"
 
 [tool.poetry.dev-dependencies]
