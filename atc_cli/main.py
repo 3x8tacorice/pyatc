@@ -50,6 +50,43 @@ class Contest(object):
             return "{} already exists.".format(problem_file.name)
 
         return problem
+    
+    def clean(self, contest_id, difficulty="", all=False):
+        problem = {
+            "contest": contest_id,
+            "difficulty": difficulty
+        }
+
+        # check contest directory exists
+        contest_dir = Path(contest_id)
+        if not contest_dir.exists():
+            return "{} does not exist.".format(contest_dir.name)
+        
+        # check all option
+        if all:
+            for p in contest_dir.iterdir():
+                if p.is_file():
+                    p.unlink()
+            return "has cleaned up."
+
+        # check problem script exists
+        if difficulty == "":
+            return "without --all option, required specified difficulty"
+        problem_file = contest_dir / Path(difficulty + ".py")
+        if not problem_file.exists():
+            return "{} does not exist.".format(problem_file.name)
+        
+        # clean up
+        try:
+            problem_file.unlink()
+        except Exception as e:
+            return e
+
+        return "has cleaned up"
+
+
+
+
 
 
 def contest():
