@@ -9,11 +9,16 @@ class Contest(object):
             "contest": contest_id,
             "difficulty": difficulty
         }
+
+        # make contest directory
         contest_dir = Path(contest_id)
-        print(contest_dir.exists())
         if not contest_dir.exists():
             contest_dir.mkdir()
-        print(contest_dir.exists())
+        
+        # make empty script by difficulty
+        problem_file = contest_dir / Path(difficulty + ".py")
+        if not problem_file.exists():
+            problem_file.touch()
         return problem
 
 
