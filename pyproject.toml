@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "atc-cli"
+name = "pyatc-cli"
 version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.scripts]
-"atcli" = "atc_cli.main:contest"
+"pyatc" = "pyatc_cli.main:contest"
 
 [tool.poetry.dependencies]
 python = ">=3.7"
