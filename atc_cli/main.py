@@ -11,11 +11,11 @@ from . import templates
 class Contest(object):
     """A simple contest class."""
 
-    def new(self, contest_id, difficulty):
+    def new(self, contest_id, level):
 
         problem = {
             "contest": contest_id,
-            "difficulty": difficulty
+            "level": level
         }
 
         # make contest directory
@@ -23,8 +23,8 @@ class Contest(object):
         if not contest_dir.exists():
             contest_dir.mkdir(parents=True, exist_ok=True)
         
-        # populate script template by difficulty
-        problem_file = contest_dir / Path(difficulty + ".py")
+        # populate script template by level
+        problem_file = contest_dir / Path(level + ".py")
         if not problem_file.exists():
             # read script template from package resources
             SOLVE_PROBLEM_TEMPLATE = "solve_problem.py.template"
@@ -37,7 +37,7 @@ class Contest(object):
                 return "has cleaned up"
 
             # write script template by problem info
-            populated = template.replace("{{ Problem }}", contest_id + " " + difficulty)
+            populated = template.replace("{{ Problem }}", contest_id + " " + level)
             try:
                 problem_file.write_text(populated)
             except Exception as e:
@@ -51,10 +51,10 @@ class Contest(object):
 
         return problem
     
-    def clean(self, contest_id, difficulty="", all=False):
+    def clean(self, contest_id, level="", all=False):
         problem = {
             "contest": contest_id,
-            "difficulty": difficulty
+            "level": level
         }
 
         # check contest directory exists
@@ -70,9 +70,9 @@ class Contest(object):
             return "has cleaned up."
 
         # check problem script exists
-        if difficulty == "":
-            return "without --all option, required specified difficulty"
-        problem_file = contest_dir / Path(difficulty + ".py")
+        if level == "":
+            return "without --all option, required specified level"
+        problem_file = contest_dir / Path(level + ".py")
         if not problem_file.exists():
             return "{} does not exist.".format(problem_file.name)
         
